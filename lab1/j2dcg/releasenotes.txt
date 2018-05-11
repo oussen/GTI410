@@ -1,0 +1,80 @@
+Version 1.6.2, 2006-02-08
+- Corrected a bug in the image creating (null pointer if cancel is clicked
+  in the file selection dialog).
+- Changed the code for the correlation (filtering) such that it is less
+  likely that students interchange columns and rows.
+
+Version 1.6.1, 2005-12-09
+- Removed the gti410.jpg file from the project
+
+Version 1.6.0, 2004-08-31
+- Corrected many bugs (e.g., boundary color in the fill user interface
+was not refreshing correctly, remote translating of rectangles, ui
+layout)
+- Worked on the support of the undo operation (added many mementos).
+- Implemented many features (e.g., seed filling now uses a stack
+instead of recursive calls, revamped the user interface for curves,
+added a combobox with filter types in the filter user interface,
+modified the mediators and color result in the color dialog such that
+it is simpler to keep the different color tabs in sync).
+
+Version 1.5.0, 2004-03-22
+- Corrected a bug which caused a null pointer exception when creating a new 
+  curve while a shape (not a curve nor a control point) was selected.
+- Added support for the shape to return their bounding rectangle.
+- Selected shapes are highlighted with points along their bounding rectangle.
+- Made the addition of control points easier by handling the mouse release
+  message (instead of the mouse clicked one).
+- The translation of objects is now accomplished with Affine transformations
+  (instead of translating the center). This will become useful
+  when the transformation code is added.
+- Began adding the code to support commands.
+- Partially added code for undo support.
+- User interface for geometric transformations was added (translation, 
+  rotation, shear, scale).
+
+Version 1.4.1, 2004-03-02
+- Corrected color modification.
+- Corrected null pointer exception bug of curves.
+
+Version 1.4.0, 2004-03-02
+- Added the code for the curves lab.
+
+Version 1.3.2, 2004-02-19
+- Fixed a problem of the FilterPanel that prevented the FilteringTransformer
+  that computes the filtering from recieving the values of the filter from
+  the UI.
+- Fixed a problem in the MeanFilter3x3 class which caused wrong filtering and
+  was particularly problematic if the values of the filter were changed to a
+  Laplacian filter.
+
+Version 1.3.1, 2004-02-13
+- Fixed the UI of the filtering kernel such that the FilteringTransformer is
+  called when Enter is hit with the newly entered values.
+
+Version 1.3.0, 2004-02-11
+- Added the filtering user interface, abstract classes and example concrete
+  classes.
+
+Version 1.2.0, 2004-01-28
+- Modified the selection mechanism such that objects on top are selected
+  instead of objects at the bottom.
+- Added user interface for seed fills and an example class (ImageLineFiller).
+
+Version 1.1.1
+- The selection mechanism was cleaned up and simplified. Many bugs were
+  fixed.
+- Code was added for a new object type: Image
+
+Version 1.1.0
+- Fixed a problem with inappropriate updates of the color picker and wrong 
+  colors assigned to the object when OK was clicked without touching the
+  color sliders.
+
+Version 1.0.3, 2004-01-14
+- This was the first stable release. 
+- It includes two primitives (Disc and Rectangle) and a color picker for RGB
+  with UI to help in creating CMYK, HLS and other color models.
+- It fixed the major problems caused by incorrect commits that happened just
+  after 05h55EDT. All these changes can be easily identified since they all
+  come from user tzeblackwizard.

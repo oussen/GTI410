@@ -1,0 +1,91 @@
+<!-- 
+   This file is part of j2dcg.
+   j2dcg is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   j2dcg is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with j2dcg; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+-->
+
+<!-- Ant makefile for j2dcg -->
+<!-- Author: Eric Paquette -->
+<!-- Created: 2003-12-16 -->
+<!-- $Revision: 1.4 $ -->
+
+<project name="j2dcg" default="run">
+
+ <!-- utilize predefined environment variables -->
+ <property name="env" environment="env" value="env"/>
+ <property name="build_subdir" value="bin"/>
+ <property name="build_dir" value="${basedir}\${build_subdir}"/>
+ <property name="javadoc_dir" value="${basedir}\javadoc"/>
+ <property name="source_subdir" value="src"/>
+ <property name="source_dir" value="${basedir}\${source_subdir}"/>
+ <property name="JAVA_HOME" value="${env.JAVA_HOME}"/>
+ <property name="ClassPath" value="${env.ClassPath}"/>
+ <property name="zip_file" value="j2dcg.zip"/>
+   
+ <target name="init" description="Displays directories information">
+  <echo message="project.name: ${ant.project.name}" />
+  <echo message="JAVA_HOME: ${JAVA_HOME}" />
+  <echo message="ClassPath: ${ClassPath}"/>
+  <echo message="basedir: ${basedir}" />
+  <echo message="source_dir: ${source_dir}" /> 
+  <echo message="build_dir: ${build_dir}" />
+  <echo message="javadoc_dir: ${javadoc_dir}" />
+  <echo message="ant.file: ${ant.file}" />
+  <echo message="java.version: ${ant.java.version}" />
+  <tstamp/>
+ </target>
+    
+ <target name="compile" depends="init" description="Compile everything.">
+  <!-- First, ensure the build directory exists. -->
+  <mkdir dir="${build_subdir}" />
+  <!-- Build everything; add debug="on" to debug -->
+  <javac srcdir="${source_dir}" destdir="${build_subdir}" optimize="on" debug="on">
+  </javac>
+ </target>
+  
+ <target name="clean" description="Delete the build files.">
+  <delete dir="${build_dir}" />
+  <delete dir="${javadoc_dir}" />
+  <delete file="${zip_file}"/>
+ </target>
+
+ <target name="run" depends="compile" description="Build and run j2dcg.">
+  <java dir="${build_dir}" classname="view.Application" fork="yes">
+   <classpath>
+    <pathelement path="${build_dir}"/>
+    <pathelement path="${java.class.path}"/>
+   </classpath>
+  </java>
+ </target>
+  
+ <target name="zip" depends="clean" description="Build j2dcg.zip.">
+  <zip destfile="${zip_file}"
+       basedir="."
+       includes="${source_subdir}/** build.xml license.txt"/>
+ </target>
+
+ <target name="javadocs" description="Build the JavaDocs.">
+  <delete dir="${javadoc_dir}" />
+  <mkdir dir="${javadoc_dir}" />
+  <javadoc 
+           sourcepath="${source_dir}"
+           packagenames="controller,model,view"
+           destdir="${javadoc_dir}"
+           author="true"
+           version="true"
+           use="true"
+           verbose="true"
+           windowtitle="j2dcg">
+  </javadoc>
+ </target>
+
+</project>
