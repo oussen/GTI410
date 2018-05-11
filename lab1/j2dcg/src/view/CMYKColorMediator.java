@@ -202,7 +202,7 @@ public double getCyan() {
 public void update() {
 	// When updated with the new "result" color, if the "currentColor"
 	// is aready properly set, there is no need to recompute the images.
-	Pixel currentColor = new Pixel(red, green, blue, 255);
+	Pixel currentColor = new Pixel(cyan, magenta, yellow, 255);
 	if(currentColor.getARGB() == result.getPixel().getARGB()) return;
 
 	cyan = result.getPixel().getRed();
